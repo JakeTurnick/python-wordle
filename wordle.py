@@ -1,11 +1,15 @@
 import random
-from colorama import Fore, Back
+from colorama import Fore, Back, Style
 
 TEST_WORD = "clear"
 
 curr_wordle = "-----"
 attemps = -1  # amount of attempts so far
 
+# Colors are leaking into the input, not sure why
+# also if using repeated characters ...
+# ... All instances of that character are the same color
+# ... ex: word = clear -> rrrrr (all yellow, last should be green)
 
 guess = input(Fore.RESET + "Guess a 5 letter word: ")
 while len(guess) != 5:
@@ -42,7 +46,7 @@ while attemps < 10:
         print("you win!\nThe word was - " + Fore.CYAN + guess.lower())
         break
 
-    print(f"Attempts remaining: {attemps}/6")
-    guess = input(Fore.RESET + guide + "\n")
+    print(Style.RESET_ALL + f"Attempts remaining: {attemps}/6")
+    guess = input(Style.RESET_ALL + guide + "\n")
     while len(guess) != 5:
         guess = input(Fore.RESET + "Word must be 5 characters long: ")
