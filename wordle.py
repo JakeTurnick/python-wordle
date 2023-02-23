@@ -1,6 +1,15 @@
 import random
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style, init
+init(autoreset=True)
 
+words = open('/usr/share/dict/words', 'r')
+newWords = []
+
+for word in words:
+    if len(word) == 6:
+        newWords.append(word)
+
+word = random.choice(newWords).lower()
 TEST_WORD = "clear"
 
 curr_wordle = "-----"
@@ -21,13 +30,13 @@ while attemps < 10:
     guide = ""
 
     if attemps > 5:
-        print(f"You lost! The word was {Fore.RED + TEST_WORD}")
+        print(f"You lost! The word was {Fore.RED + word}")
         break
 
     for char in guess:
-        if TEST_WORD.__contains__(char):
+        if word.__contains__(char):
             # print(f"{TEST_WORD} contains the letter {char} at {guess.index(char)}")
-            if TEST_WORD.index(char) == guess.index(char):
+            if word.index(char) == guess.index(char):
                 # print(f"{char} is in the right place")
                 # print green
                 attemp += (Fore.GREEN + char)
@@ -42,7 +51,7 @@ while attemps < 10:
             guide += (Fore.RESET + "-")
     Fore.RESET
     # print("attemp: ", attemp, " word: ", TEST_WORD)
-    if guess.lower() == TEST_WORD.lower():
+    if guess.lower() == word.lower():
         print("you win!\nThe word was - " + Fore.CYAN + guess.lower())
         break
 
