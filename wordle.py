@@ -12,8 +12,8 @@ for word in words:
 words.close()
 
 word = random.choice(newWords).lower().strip()
-# word = TEST_WORD
-# print("Hint - " + word)
+word = TEST_WORD
+print("Hint - " + word)
 
 
 curr_wordle = "-----"
@@ -34,33 +34,49 @@ while attemps < 10:
     attemps += 1
     attemp = ""
     guide = ""
-    Fore.RESET
+    Style.RESET_ALL
 
     if attemps > 6:
         Fore.RESET
         print(f"You lost! The word was {Fore.RED + word}")
         break
 
-    for char in guess:
-        if word.__contains__(char):
+# the issue is the index is checked by the first instance of the letter
+    # for char in guess:
+    #     if word.__contains__(char):
+    #         # print(f"{TEST_WORD} contains the letter {char} at {guess.index(char)}")
+    #         if word.index(char) == guess.index(char):
+    #             # print(f"{char} is in the right place")
+    #             # print green
+    #             attemp += (Fore.GREEN + char)
+    #             guide += (Fore.GREEN + char)
+    #             Style.RESET_ALL
+    #         # print yellow
+    #         else:
+    #             attemp += (Fore.YELLOW + char)
+    #             guide += (Fore.YELLOW + char)
+    #             Style.RESET_ALL
+    #     # add character no style
+    #     else:
+    #         attemp += (Fore.RESET + char)
+    #         guide += (Fore.RESET + "-")
+    #         guide_check[guess.index(char)] = ""
+    # Fore.RESET
 
-            # print(f"{TEST_WORD} contains the letter {char} at {guess.index(char)}")
-            # print(char + " is at word " + str(word.index(char)))
-            # print(char + " is at guess " + str(guess.index(char)))
-            if word.index(char) == guess.index(char):
-                # print(f"{char} is in the right place")
-                # print green
-                attemp += (Fore.GREEN + char)
-                guide += (Fore.GREEN + char)
+    for i in range(0, 5):
+        if word.__contains__(guess[i]):
+            if word[i] == guess[i]:
+                attemp += (Fore.GREEN + guess[i])
+                guide += (Fore.GREEN + guess[i])
                 Style.RESET_ALL
             # print yellow
             else:
-                attemp += (Fore.YELLOW + char)
-                guide += (Fore.YELLOW + char)
+                attemp += (Fore.YELLOW + guess[i])
+                guide += (Fore.YELLOW + guess[i])
                 Style.RESET_ALL
         # add character no style
         else:
-            attemp += (Fore.RESET + char)
+            attemp += (Fore.RESET + guess[i])
             guide += (Fore.RESET + "-")
     Fore.RESET
 
