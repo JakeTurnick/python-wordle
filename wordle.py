@@ -12,7 +12,7 @@ for word in words:
 words.close()
 
 word = random.choice(newWords).lower().strip()
-word = TEST_WORD
+# word = TEST_WORD
 print("Hint - " + word)
 
 
