@@ -13,12 +13,19 @@ words.close()
 
 word = random.choice(newWords).lower().strip()
 # word = TEST_WORD
-print("Hint - " + word)
+# print("Hint - " + word)
 
 
 curr_wordle = "-----"
 attemps = -1  # amount of attempts so far
-
+print("""\
+     __    __               _      _       
+    / / /\ \ \  ___   _ __ | |  __| |  ___ 
+    \ \/  \/ / / _ \ | '__|| | / _` | / _ \\
+     \  /\  / | (_) || |   | || (_| ||  __/
+      \/  \/   \___/ |_|   |_| \__,_| \___|
+                                     
+                                     """)
 guess = input(Fore.RESET + "Guess a 5 letter word: ")
 while len(guess) != 5:
     guess = input(Fore.RESET + "Word must be 5 characters long: ")
@@ -30,7 +37,7 @@ while attemps < 10:
     guide = ""
     Style.RESET_ALL
 
-    if attemps > 6:
+    if attemps >= 6:
         Fore.RESET
         print(f"You lost! The word was {Fore.RED + word}")
         break
